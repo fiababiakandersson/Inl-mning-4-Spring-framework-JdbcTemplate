@@ -15,6 +15,19 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
     private static final String GET_CUSTOMER_BY_ID = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID=?";
     private static final String GET_CUSTOMER_BY_NAME = "SELECT * FROM CUSTOMER WHERE COMPANYNAME=?";
     private static final String ADD_CALL_SQL = "UPDATE CUSTOMER SET CALLS=? WHERE CUSTOMER_ID=?";
+    private static final String CREATE_CALL_TABLE = "CREATE TABLE TBL_CALL (" +
+            "ID INT PRIMARY KEY AUTO_INCREMENT, " +
+            "TIMEADDATE TIMESTAMP, " +
+            "NOTES VARCHAR(255)" +
+            ")";
+
+    private static final String CREATE_CUSTOMER_TABLE = "CREATE TABLE CUSTOMER (" +
+            "ID INT PRIMARY KEY AUTO_INCREMENT, " +
+            "COMPANYNAME VARCHAR(255), " +
+            "EMAIL VARCHAR(255), " +
+            "TELEPHONE VARCHAR(50), " +
+            "NOTES VARCHAR(255)" +
+            ")";
 
     private JdbcTemplate template;
 
@@ -69,6 +82,10 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
         this.template.update(ADD_CALL_SQL, newCall.getNotes(), customerId);
     }
 
+    public void createTables() {
+        this.template.execute(CREATE_CALL_TABLE);
+        this.template.execute(CREATE_CUSTOMER_TABLE);
+    }
 }
 
 class CustomerRowMapper implements RowMapper<Customer> {
