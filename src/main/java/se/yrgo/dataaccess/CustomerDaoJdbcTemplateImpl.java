@@ -17,7 +17,7 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
     private static final String ADD_CALL_SQL = "UPDATE CUSTOMER SET CALLS=? WHERE CUSTOMER_ID=?";
     private static final String CREATE_CALL_TABLE = "CREATE TABLE TBL_CALL (" +
             "ID INT PRIMARY KEY AUTO_INCREMENT, " +
-            "TIMEADDATE TIMESTAMP, " +
+            "TIMEANDDATE TIMESTAMP, " +
             "NOTES VARCHAR(255)" +
             ")";
 
